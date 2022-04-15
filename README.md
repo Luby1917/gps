@@ -25,5 +25,30 @@ scan on
 pair [MAC]
 connect [MAC] // optional
 
+
+To accept connections we need:
+
+Modify the bluetooth service config: 
+`vi  /etc/systemd/system/dbus-org.bluez.service`
+
+And change these line: 
+
+```
+ExecStart=/usr/libexec/bluetooth/bluetoothd -C  --noplugin=sap
+ExecStartPost=/usr/bin/sdptool add SP
+```
+Then execute (best if incluede as service)
+rfcomm watch hci0
+
+this will make the connected devices be available on `/dev/rfcomm0`
+
+Now we have availble both data streams, now we must to sync them in order to use the GPOS via BT
+
 ## Data sync
+
+
 To to send the BT data to USB and backwards we use th socat command (usually not installed by default)
+```
+ socat /dev/rfcomm0,raw,echo=0,crnl /dev/ttyUSB0,raw,echo=0,crnl
+ socat /dev/rfcomm0,raw,echo=0,crnl /dev/ttyUSB0,raw,echo=0,crnl
+```
