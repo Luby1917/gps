@@ -40,6 +40,8 @@ ExecStartPost=/usr/bin/sdptool add SP
 Then execute (best if incluede as service)
 rfcomm watch hci0
 
+Optionally, may be the `sudo rfcomm bind /dev/rfcomm0 [MAC] 1` command be in help
+
 this will make the connected devices be available on `/dev/rfcomm0`
 
 Now we have availble both data streams, now we must to sync them in order to use the GPOS via BT
