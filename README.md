@@ -18,5 +18,12 @@ Here comes the tricky part the BT config.
 
 First, we need to check the the BT controller:
 
+`bluetooth`
+discoverable on
+scan on
 
+pair [MAC]
+connect [MAC] // optional
 
+## Data sync
+To to send the BT data to USB and backwards we use th socat command (usually not installed by default)
